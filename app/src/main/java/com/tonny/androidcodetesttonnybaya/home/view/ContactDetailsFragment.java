@@ -23,6 +23,6 @@ public class ContactDetailsFragment extends BaseFragment {
 
     @Override
     public void onBackPressed() {
-
+        getFragmentManager().popBackStack();
     }
 }

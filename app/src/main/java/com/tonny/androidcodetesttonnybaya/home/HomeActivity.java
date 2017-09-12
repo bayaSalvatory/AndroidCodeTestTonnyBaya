@@ -3,12 +3,17 @@ package com.tonny.androidcodetesttonnybaya.home;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
 
 import com.tonny.androidcodetesttonnybaya.App;
 import com.tonny.androidcodetesttonnybaya.R;
 import com.tonny.androidcodetesttonnybaya.base.BaseActivity;
 import com.tonny.androidcodetesttonnybaya.base.BaseFragment;
+import com.tonny.androidcodetesttonnybaya.databinding.ActivityHomeBinding;
 import com.tonny.androidcodetesttonnybaya.home.api.IHomeActivity;
+import com.tonny.androidcodetesttonnybaya.home.api.OnClickListener;
 import com.tonny.androidcodetesttonnybaya.home.view.ContactDetailsFragment;
 import com.tonny.androidcodetesttonnybaya.home.view.ContactEditFragment;
 import com.tonny.androidcodetesttonnybaya.home.view.ContactsFragment;
@@ -18,13 +23,27 @@ import com.tonny.androidcodetesttonnybaya.home.view.ContactsFragment;
  *
  * @author tonnbaya@yahoo.co.uk
  */
-public class HomeActivity extends BaseActivity implements IHomeActivity {
+public class HomeActivity extends BaseActivity implements IHomeActivity, View.OnClickListener {
+
+    private static final String _TAG = HomeActivity.class.getSimpleName();
+    public static final String CONTACT_ID_KEY = "contactId";
+
+    private static final String[] NAMES_SUGGESTION = new String[] {
+            "Tonny", "Salva", "Tom", "Ken", "Kenneth"
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DataBindingUtil.setContentView(this,
+        ActivityHomeBinding binding = DataBindingUtil.setContentView(this,
                 R.layout.activity_home);
+
+        binding.setClickListener(this);
+
+        // Array Adapter for name Suggestion
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, NAMES_SUGGESTION);
+        binding.searchEditText.setAdapter(adapter);
 
         setFragmentByAction(App.FragmentAction.INDEX);
     }
@@ -52,7 +71,7 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
 
         String tag = fragment != null ? fragment.getFragmentTag() : "";
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, fragment)
+                .replace(R.id.content_frame, fragment, tag)
                 .addToBackStack(tag)
                 .commit();
     }
@@ -66,6 +85,15 @@ public class HomeActivity extends BaseActivity implements IHomeActivity {
             }
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab:
+                setFragmentByAction(App.FragmentAction.EDIT);
+                break;
         }
     }
 }

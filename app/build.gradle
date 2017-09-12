@@ -38,4 +38,7 @@ dependencies {
 
     // Recycler view Dependency
     compile 'com.android.support:recyclerview-v7:26.0.2'
+
+    // Material design lib
+    compile 'com.android.support:design:26.0.2'
 }

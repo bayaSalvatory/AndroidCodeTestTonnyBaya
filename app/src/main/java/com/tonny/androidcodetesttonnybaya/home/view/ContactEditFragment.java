@@ -22,6 +22,6 @@ public class ContactEditFragment extends BaseFragment {
 
     @Override
     public void onBackPressed() {
-
+        getFragmentManager().popBackStack();
     }
 }

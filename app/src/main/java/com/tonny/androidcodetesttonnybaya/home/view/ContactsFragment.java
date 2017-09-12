@@ -10,10 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tonny.androidcodetesttonnybaya.App;
 import com.tonny.androidcodetesttonnybaya.R;
 import com.tonny.androidcodetesttonnybaya.base.BaseFragment;
 import com.tonny.androidcodetesttonnybaya.databinding.FragmentContactsBinding;
 import com.tonny.androidcodetesttonnybaya.databinding.ItemContactBinding;
+import com.tonny.androidcodetesttonnybaya.home.HomeActivity;
+import com.tonny.androidcodetesttonnybaya.home.api.IHomeActivity;
+import com.tonny.androidcodetesttonnybaya.home.api.OnClickListener;
 import com.tonny.androidcodetesttonnybaya.home.model.Contact;
 
 import java.util.ArrayList;
@@ -24,7 +28,9 @@ import java.util.List;
  *
  * @author tonnbaya@yahoo.co.uk
  */
-public class ContactsFragment extends BaseFragment {
+public class ContactsFragment extends BaseFragment implements OnClickListener {
+
+    private IHomeActivity m_homeActivity;
 
     public static ContactsFragment newInstance() {
         return new ContactsFragment();
@@ -32,6 +38,12 @@ public class ContactsFragment extends BaseFragment {
 
     public ContactsFragment() {
         // Recommended Empty Constructor.
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        m_homeActivity = (IHomeActivity) context;
     }
 
     @Nullable
@@ -45,7 +57,7 @@ public class ContactsFragment extends BaseFragment {
         // Set Recycler LayoutManager
         binding.recyclerView.setLayoutManager(manager);
         // Set Recycler Adapter
-        binding.recyclerView.setAdapter(new ContactsListAdapter(getDummyList()));
+        binding.recyclerView.setAdapter(new ContactsListAdapter(this, getDummyList()));
 
         return binding.getRoot();
     }
@@ -60,11 +72,17 @@ public class ContactsFragment extends BaseFragment {
 
     }
 
+    /**
+     * Todo We will have the know contact list and therefore just inject it
+     * Todo this is only for testing purpose.
+     *
+     * @return
+     */
     public List<Contact> getDummyList() {
-        Contact contact = new Contact("Baya", "Sal");
-        Contact contact1 = new Contact("Baya", "Ema");
-        Contact contact2 = new Contact("Baya", "Elphas");
-        Contact contact3 = new Contact("Baya", "Thobias");
+        Contact contact = new Contact(0, "Baya", "Sal");
+        Contact contact1 = new Contact(1, "Baya", "Ema");
+        Contact contact2 = new Contact(2, "Baya", "Elphas");
+        Contact contact3 = new Contact(3, "Baya", "Thobias");
         List<Contact> contactList = new ArrayList<>();
         contactList.add(contact);
         contactList.add(contact1);
@@ -73,13 +91,22 @@ public class ContactsFragment extends BaseFragment {
         return contactList;
     }
 
+    @Override
+    public void click(int id) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(HomeActivity.CONTACT_ID_KEY, id);
+        m_homeActivity.setFragmentByAction(App.FragmentAction.SHOW, bundle);
+    }
+
     private static class ContactsListAdapter extends RecyclerView.Adapter
             <ContactsListAdapter.ContactViewHolder> {
 
+        private OnClickListener mClickListener;
         private List<Contact> m_contactsList = new ArrayList<>();
         private ItemContactBinding mBinding;
 
-        ContactsListAdapter(List<Contact> contactList) {
+        ContactsListAdapter(OnClickListener listener, List<Contact> contactList) {
+            this.mClickListener = listener;
             this.m_contactsList.addAll(contactList);
         }
 
@@ -108,11 +135,17 @@ public class ContactsFragment extends BaseFragment {
             }
 
             void bind(int position) {
-                Contact contact = m_contactsList.get(position);
+                final Contact contact = m_contactsList.get(position);
                 if (contact != null) {
                     String displayName = contact.getFirstName() + " " + contact.getLastName();
                     mBinding.nameTextView.setText(displayName);
                     mBinding.initialsTextView.setText(contact.getInitials());
+                    mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mClickListener.click(contact.getId());
+                        }
+                    });
                 }
             }
         }
