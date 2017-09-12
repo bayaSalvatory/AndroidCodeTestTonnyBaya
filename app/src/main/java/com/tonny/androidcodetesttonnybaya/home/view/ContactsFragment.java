@@ -32,7 +32,7 @@ import java.util.List;
 public class ContactsFragment extends BaseFragment implements OnClickListener {
 
     private IHomeActivity m_homeActivity;
-    private static final String[] NAMES_SUGGESTION = new String[] {
+    private static final String[] NAMES_SUGGESTION = new String[]{
             "Tonny", "Salva", "Tom", "Ken", "Kenneth"
     };
 

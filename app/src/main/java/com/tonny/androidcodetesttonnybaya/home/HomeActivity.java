@@ -3,9 +3,7 @@ package com.tonny.androidcodetesttonnybaya.home;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import com.tonny.androidcodetesttonnybaya.App;
 import com.tonny.androidcodetesttonnybaya.R;
@@ -13,7 +11,6 @@ import com.tonny.androidcodetesttonnybaya.base.BaseActivity;
 import com.tonny.androidcodetesttonnybaya.base.BaseFragment;
 import com.tonny.androidcodetesttonnybaya.databinding.ActivityHomeBinding;
 import com.tonny.androidcodetesttonnybaya.home.api.IHomeActivity;
-import com.tonny.androidcodetesttonnybaya.home.api.OnClickListener;
 import com.tonny.androidcodetesttonnybaya.home.view.ContactDetailsFragment;
 import com.tonny.androidcodetesttonnybaya.home.view.ContactEditFragment;
 import com.tonny.androidcodetesttonnybaya.home.view.ContactsFragment;
@@ -28,6 +25,10 @@ public class HomeActivity extends BaseActivity implements IHomeActivity, View.On
     private static final String _TAG = HomeActivity.class.getSimpleName();
     public static final String CONTACT_ID_KEY = "contactId";
 
+    private static final String[] NAMES_SUGGESTION = new String[]{
+            "Tonny", "Salva", "Tom", "Ken", "Kenneth"
+    };
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,6 @@ public class HomeActivity extends BaseActivity implements IHomeActivity, View.On
                 R.layout.activity_home);
 
         binding.setClickListener(this);
-
         setFragmentByAction(App.FragmentAction.INDEX);
     }
 
