@@ -1,4 +1,4 @@
-package com.tonny.androidcodetesttonnybaya.home;
+package com.tonny.androidcodetesttonnybaya.contacts;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -9,31 +9,26 @@ import com.tonny.androidcodetesttonnybaya.App;
 import com.tonny.androidcodetesttonnybaya.R;
 import com.tonny.androidcodetesttonnybaya.base.BaseActivity;
 import com.tonny.androidcodetesttonnybaya.base.BaseFragment;
-import com.tonny.androidcodetesttonnybaya.databinding.ActivityHomeBinding;
-import com.tonny.androidcodetesttonnybaya.home.api.IHomeActivity;
-import com.tonny.androidcodetesttonnybaya.home.view.ContactDetailsFragment;
-import com.tonny.androidcodetesttonnybaya.home.view.ContactEditFragment;
-import com.tonny.androidcodetesttonnybaya.home.view.ContactsFragment;
+import com.tonny.androidcodetesttonnybaya.contactdetails.ContactDetailsFragment;
+import com.tonny.androidcodetesttonnybaya.contactedit.ContactEditFragment;
+import com.tonny.androidcodetesttonnybaya.databinding.ActivityContactsBinding;
+import com.tonny.androidcodetesttonnybaya.util.Injection;
 
 /**
  * Application main launcher activity
  *
  * @author tonnbaya@yahoo.co.uk
  */
-public class HomeActivity extends BaseActivity implements IHomeActivity, View.OnClickListener {
+public class ContactsActivity extends BaseActivity implements IContactsListView, View.OnClickListener {
 
-    private static final String _TAG = HomeActivity.class.getSimpleName();
+    private static final String _TAG = ContactsActivity.class.getSimpleName();
     public static final String CONTACT_ID_KEY = "contactId";
-
-    private static final String[] NAMES_SUGGESTION = new String[]{
-            "Tonny", "Salva", "Tom", "Ken", "Kenneth"
-    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityHomeBinding binding = DataBindingUtil.setContentView(this,
-                R.layout.activity_home);
+        ActivityContactsBinding binding = DataBindingUtil.setContentView(this,
+                R.layout.activity_contacts);
 
         binding.setClickListener(this);
         setFragmentByAction(App.FragmentAction.INDEX);
@@ -51,6 +46,9 @@ public class HomeActivity extends BaseActivity implements IHomeActivity, View.On
         switch (action) {
             case App.FragmentAction.INDEX:
                 fragment = ContactsFragment.newInstance();
+                fragment.setViewModel(new ContactsViewModel(
+                        Injection.provideContactRepository(getApplicationContext()),
+                        getApplicationContext()));
                 break;
             case App.FragmentAction.EDIT:
                 fragment = ContactEditFragment.newInstance();

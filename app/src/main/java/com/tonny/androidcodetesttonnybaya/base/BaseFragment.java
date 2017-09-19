@@ -1,5 +1,6 @@
 package com.tonny.androidcodetesttonnybaya.base;
 
+import android.databinding.BaseObservable;
 import android.support.v4.app.Fragment;
 
 /**
@@ -13,4 +14,6 @@ public abstract class BaseFragment extends Fragment {
     public abstract String getFragmentTag();
 
     public abstract void onBackPressed();
+
+    public abstract void setViewModel(BaseObservable observable);
 }

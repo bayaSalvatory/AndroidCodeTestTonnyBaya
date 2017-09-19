@@ -25,7 +25,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginEnd="15dp"
             android:onClickListener="@{clickListener}"
-            android:src="@drawable/ic_add_circle_outline_black_24dp" />
+            android:src="@drawable/ic_add" />
 
     </android.support.design.widget.CoordinatorLayout>
 

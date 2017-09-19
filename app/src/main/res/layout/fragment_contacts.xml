@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="view"
+            type="com.tonny.androidcodetesttonnybaya.contacts.ContactsFragment" />
+
+        <variable
+            name="viewmodel"
+            type="com.tonny.androidcodetesttonnybaya.contacts.ContactsViewModel" />
+    </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -28,9 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            app:items="@{viewmodel.items}"/>
 
     </android.support.design.widget.CoordinatorLayout>
-
 
 </layout>

@@ -1,5 +1,6 @@
-package com.tonny.androidcodetesttonnybaya.home.view;
+package com.tonny.androidcodetesttonnybaya.contactedit;
 
+import android.databinding.BaseObservable;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,19 +10,19 @@ import android.view.ViewGroup;
 
 import com.tonny.androidcodetesttonnybaya.R;
 import com.tonny.androidcodetesttonnybaya.base.BaseFragment;
-import com.tonny.androidcodetesttonnybaya.databinding.FragmentContactDetailBinding;
+import com.tonny.androidcodetesttonnybaya.databinding.FragmentContactEditBinding;
 
 /**
  * @author tonnbaya@yahoo.co.uk
  */
+public class ContactEditFragment extends BaseFragment {
 
-public class ContactDetailsFragment extends BaseFragment {
 
-    public static ContactDetailsFragment newInstance() {
-        return new ContactDetailsFragment();
+    public static ContactEditFragment newInstance() {
+        return new ContactEditFragment();
     }
 
-    public ContactDetailsFragment() {
+    public ContactEditFragment() {
         // Recommended Empty Constructor.
     }
 
@@ -29,19 +30,27 @@ public class ContactDetailsFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        FragmentContactDetailBinding binding = DataBindingUtil.inflate(inflater,
-                R.layout.fragment_contact_detail,
+
+        FragmentContactEditBinding binding = DataBindingUtil.inflate(inflater,
+                R.layout.fragment_contact_edit,
                 container, false);
+
+
         return binding.getRoot();
     }
 
     @Override
     public String getFragmentTag() {
-        return "ContactDetailsFragment";
+        return "ContactEditFragment";
     }
 
     @Override
     public void onBackPressed() {
         getFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void setViewModel(BaseObservable observable) {
+
     }
 }

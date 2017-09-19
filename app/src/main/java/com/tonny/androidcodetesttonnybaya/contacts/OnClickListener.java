@@ -1,4 +1,4 @@
-package com.tonny.androidcodetesttonnybaya.home.api;
+package com.tonny.androidcodetesttonnybaya.contacts;
 
 /**
  * Abstraction for click listener.

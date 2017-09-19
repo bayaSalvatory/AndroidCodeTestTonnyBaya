@@ -1,11 +1,11 @@
-package com.tonny.androidcodetesttonnybaya.home.api;
+package com.tonny.androidcodetesttonnybaya.contacts;
 
 import android.os.Bundle;
 
 /**
  * Abstraction for homeActivity
  */
-public interface IHomeActivity {
+public interface IContactsListView {
 
     /**
      * Use this to set the current fragment by action.

@@ -1,4 +1,4 @@
-package com.tonny.androidcodetesttonnybaya.home.model;
+package com.tonny.androidcodetesttonnybaya.data;
 
 /**
  * Contact Pojo Object.

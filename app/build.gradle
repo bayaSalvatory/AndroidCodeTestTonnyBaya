@@ -41,4 +41,7 @@ dependencies {
 
     // Material design lib
     compile 'com.android.support:design:26.0.2'
+
+    // Useful Java functions
+    compile 'com.google.guava:guava:23.0-android'
 }
