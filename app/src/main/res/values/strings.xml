@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Android Code Test Tonny Baya</string>
     <string name="search">Search</string>
+
+
+    <!-- Used for the AlphabetIndexer in ContactsListFragment to provide quick navigation by
+        alphabet using ListView fast scroll. -->
+    <string name="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="search_match_other">atches Other Field</string>
+    <string name="add_contact">Add contact</string>
+    <string name="imageview_description">Contact thumbnail</string>
+    <string name="menu_edit_contact">Edit Contact</string>
+    <string name="address_button_description">View Address</string>
+    <string name="no_address">No Address</string>
+    <string name="no_intent_found">No intent found</string>
+
 </resources>

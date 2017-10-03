@@ -15,36 +15,24 @@
             type="com.tonny.androidcodetesttonnybaya.contacts.ContactsViewModel" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
-
-            <AutoCompleteTextView
-                android:id="@+id/search_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="10dp"
-                android:background="@android:color/transparent"
-                android:hint="@string/search"
-                android:textColor="@android:color/white"
-                android:textColorHint="@android:color/white"
-                android:textSize="18sp" />
-
-        </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize"
             android:orientation="vertical"
-            app:items="@{viewmodel.items}"/>
+            android:visibility="gone"
+            app:items="@{viewmodel.items}" />
 
-    </android.support.design.widget.CoordinatorLayout>
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
 
 </layout>
